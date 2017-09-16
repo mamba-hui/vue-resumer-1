@@ -1,28 +1,43 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+    <Topbar class="topbar"/>
+    <main>
+      <Editor class="editor"/>
+      <Preview class="preview"/>
+    </main>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+  import Topbar from './components/Topbar.vue'
+  import Editor from './components/Editor.vue'
+  import Preview from './components/Preview.vue'
 
-export default {
-  name: 'app',
-  components: {
-    Hello
+  export default {
+    components: {
+      Topbar, Editor, Preview
+    }
   }
-}
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+  html, body, #app {
+    height: 100%;
+  }
+  #app {
+    display: flex;
+    flex-direction: column;
+  }
+  .topbar {
+  }
+  main {
+    display: flex;
+    flex: 1;
+    > .editor {
+      width: 20em;
+    }
+    > .preview {
+      flex: 1;
+    }
+  }
 </style>
