@@ -12,34 +12,34 @@
     </nav>
     <ol class="panels">
       <li v-show="currentTab === 0">
-        <ProfileEditor :profile="profile"/>
+        <editor-page :info="profile"/>
       </li>
       <li v-show="currentTab === 1">
-        <work-history-editor :workHistory="workHistory"/>
+        <editor-page :info="workHistory"/>
       </li>
       <li v-show="currentTab === 2">
-        <h2>学习经历</h2>
+        <editor-page :info="studyHistory"/>
       </li>
       <li v-show="currentTab === 3">
-        <h2>项目经历</h2>
+        <editor-page :info="project"/>
       </li>
       <li v-show="currentTab === 4">
-        <h2>获奖情况</h2>
+        <editor-page :info="awards"/>
       </li>
       <li v-show="currentTab === 5">
-        <h2>联系方式</h2>
+        <editor-page :info="contacts"/>
       </li>
     </ol>
   </div>
 </template>
 
 <script>
-  import ProfileEditor from './ProfileEditor.vue'
-  import WorkHistoryEditor from './WorkHistoryEditor.vue'
+  import EditorPage from './EditorPage.vue'
+
   export default {
+    props: ['profile', 'workHistory', 'studyHistory', 'project', 'awards', 'contacts'],
     components: {
-      ProfileEditor,
-      WorkHistoryEditor
+      EditorPage
     },
     data() {
       return {
@@ -47,28 +47,16 @@
         currentTab: 0,
         icons: [
           'icon-credentials_icon',
-          'icon-book',
           'icon-gongwenbao',
-          'icon-3-copy',
+          'icon-book',
+          'icon-heart',
           'icon-trophy',
-          'icon-heart'
+          'icon-3-copy'
         ],
-        profile: {
-          name: '',
-          city: '',
-          birthday: ''
-        },
-        workHistory: [
-          {
-            company: '',
-            content: ''
-          }
-        ]
+
       }
     },
-    methods: {
-
-    }
+    methods: {}
   }
 </script>
 
