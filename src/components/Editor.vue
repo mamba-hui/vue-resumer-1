@@ -12,35 +12,10 @@
     </nav>
     <ol class="panels">
       <li v-show="currentTab === 0">
-        <h2>个人信息</h2>
-        <el-form label-position="top">
-          <el-form-item label="姓名：">
-            <el-input v-model="profile.name"></el-input>
-          </el-form-item>
-          <el-form-item label="城市：">
-            <el-input v-model="profile.city"></el-input>
-          </el-form-item>
-          <el-form-item label="出生日期：">
-            <el-input v-model="profile.birthday"></el-input>
-          </el-form-item>
-        </el-form>
+        <ProfileEditor :profile="profile"/>
       </li>
       <li v-show="currentTab === 1">
-        <h2>工作经历</h2>
-        <el-form label-position="top">
-          <div v-for="(work, index) in workHistory" class="input-container">
-            <i class="el-icon-circle-close" @click="removeWorkHistory(index)"></i>
-            <el-form-item label="公司">
-              <el-input v-model="work.company"></el-input>
-            </el-form-item>
-            <el-form-item label="工作内容">
-              <el-input v-model="work.content"></el-input>
-            </el-form-item>
-          </div>
-        </el-form>
-        <div class="add-work">
-          <el-button type="primary" @click="addWorkHistory">添加工作经历</el-button>
-        </div>
+        <work-history-editor :workHistory="workHistory"/>
       </li>
       <li v-show="currentTab === 2">
         <h2>学习经历</h2>
@@ -59,7 +34,13 @@
 </template>
 
 <script>
+  import ProfileEditor from './ProfileEditor.vue'
+  import WorkHistoryEditor from './WorkHistoryEditor.vue'
   export default {
+    components: {
+      ProfileEditor,
+      WorkHistoryEditor
+    },
     data() {
       return {
         tabLength: 6,
@@ -86,15 +67,7 @@
       }
     },
     methods: {
-      addWorkHistory() {
-        this.workHistory.push({
-          company: '',
-          content: ''
-        })
-      },
-      removeWorkHistory(index) {
-        this.workHistory.splice(index, 1)
-      }
+
     }
   }
 </script>
