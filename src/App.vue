@@ -1,10 +1,11 @@
 <template>
-  <div id="app">
-    <Topbar class="topbar"/>
+  <div id="app" :class="{previewMode: previewMode}">
+    <Topbar class="topbar" @preview="preview"/>
     <main>
       <Editor v-bind="resumer" class="editor"/>
       <Preview v-bind="resumer" class="preview"/>
     </main>
+    <el-button @click="previewMode = false" class="stopPreview">取消预览</el-button>
   </div>
 </template>
 
@@ -12,10 +13,12 @@
   import Topbar from './components/Topbar.vue'
   import Editor from './components/Editor.vue'
   import Preview from './components/Preview.vue'
+  import ElButton from "../node_modules/element-ui/packages/button/src/button.vue"
 
   export default {
     data() {
       return {
+        previewMode: false,
         resumer: {
           profile: {
             canAdd: false,
@@ -84,7 +87,13 @@
       }
     },
     components: {
+      ElButton,
       Topbar, Editor, Preview
+    },
+    methods: {
+      preview() {
+        this.previewMode = true
+      }
     }
   }
 </script>
@@ -102,6 +111,24 @@
   #app {
     display: flex;
     flex-direction: column;
+    .stopPreview {
+      display: none;
+    }
+    &.previewMode {
+      .topbar, .editor {
+        display: none;
+      }
+      .preview {
+        max-width: 800px;
+        margin: 16px auto;
+      }
+      .stopPreview {
+        display: block;
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+      }
+    }
   }
   .topbar {
     box-shadow: 0 0 3px 3px rgba(0, 0, 0, .5);

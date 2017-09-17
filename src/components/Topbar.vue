@@ -4,6 +4,7 @@
       VueResumer
     </div>
     <div class="actions">
+      <el-button @click="startPreview">预览</el-button>
       <el-button type="primary">登录</el-button>
       <el-button>注册</el-button>
     </div>
@@ -19,3 +20,14 @@
     font-size: 20px;
   }
 </style>
+
+<script>
+  export default {
+    props: ['preview'],
+    methods: {
+      startPreview() {
+        this.$emit('preview')
+      }
+    }
+  }
+</script>
